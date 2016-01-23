@@ -34,7 +34,7 @@ public class NewsService {
         return is;
     }
 
-    @Scheduled(cron = "0 */45 * * * *")
+    @Scheduled(cron = "0 0/45 * * * *")
     public void buildNewsFeeds() {
         logger.info("Updating news feeds...");
         List<NewsFeed> newsFeeds = new ArrayList<NewsFeed>();
