@@ -97,6 +97,9 @@ $(function () {
         if (elapsedTime > 45) {
             $(".remainingTime").addClass("alert");
         }
+        else {
+            $(".remainingTime").removeClass("alert");
+        }
     }, 3000);
 
 });

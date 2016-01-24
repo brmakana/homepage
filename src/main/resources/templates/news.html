@@ -22,33 +22,86 @@
     ga('send', 'pageview');
 
 </script>
-<link rel="stylesheet" type="text/css" href="./styles.css" />
-
+<link rel="stylesheet" type="text/css" href="../static/styles.css" th:href="@{'./styles.css'}"/>
+<!-- Wunderground -->
 <div align="center">
     <span id="lastModifiedDate" th:text="${date}">Last Updated Date</span><span class="remainingTime"></span>
     <span style="display: block !important; width: 320px; text-align: center; font-family: sans-serif; font-size: 12px;">
-        <a href="#"
-           th:href="@{'http://www.wunderground.com/cgi-bin/findweather/getForecast?query=zmw:98116.1.99999&amp;bannertypeclick=wu_clean2day'}"
+        <a href="http://www.wunderground.com/cgi-bin/findweather/getForecast?query=zmw:98116.1.99999&amp;bannertypeclick=wu_clean2day"
            title="Seattle, Washington Weather Forecast" target="_blank">
-            <img src=""
-                 th:src="@{'http://weathersticker.wunderground.com/weathersticker/cgi-bin/banner/ban/wxBanner?bannertype=wu_clean2day_cond&amp;pwscode=KWASEATT155&amp;ForcedCity=Seattle&amp;ForcedState=WA&amp;zip=98116&amp;language=EN'}"
+            <img src="http://weathersticker.wunderground.com/weathersticker/cgi-bin/banner/ban/wxBanner?bannertype=wu_clean2day_cond&amp;pwscode=KWASEATT155&amp;ForcedCity=Seattle&amp;ForcedState=WA&amp;zip=98116&amp;language=EN"
                  alt="Find more about Weather in Seattle, WA" width="300"/>
         </a><br/>
-        <a href="#"
-           th:href="@{'http://www.wunderground.com/cgi-bin/findweather/getForecast?query=zmw:98116.1.99999&amp;bannertypeclick=wu_clean2day'}"
+        <a href="http://www.wunderground.com/cgi-bin/findweather/getForecast?query=zmw:98116.1.99999&amp;bannertypeclick=wu_clean2day"
            title="Get latest Weather Forecast updates"
            style="font-family: sans-serif; font-size: 12px" target="_blank">Click for weather forecast</a>
     </span>
 </div>
 <div align="center"><a class="gothic" href="ttrss">rss</a></div>
+<!-- /Wunderground -->
 <script src="https://npmcdn.com/masonry-layout@4.0/dist/masonry.pkgd.min.js"></script>
+<!-- Feeds -->
 <div class="grid container">
     <div class="grid-item" th:each="newsFeed : ${feeds}">
         <h3><a href="#" th:href="${newsFeed.url}"><span th:text="${newsFeed.name}">Feed Name</span></a></h3>
-        <ul th:each="feedItem : ${newsFeed.feedItems}"><li><a class="feedUrl" href="#" th:href="${feedItem.url}"><span th:text="${feedItem.subject}">Subject</span></a></li></ul>
+        <ul>
+            <li th:each="feedItem : ${newsFeed.feedItems}"><a class="feedUrl" href="#" th:href="${feedItem.url}"><span th:text="${feedItem.subject}">Item headline</span></a></li>
+        </ul>
+    </div><!--/* mock data */-->
+    <div class="grid-item" th:remove="all">
+        <h3><a href="#"><span>Feed Name</span></a></h3>
+        <ul>
+            <li><a class="feedUrl" href="#"><span>Item headline</span></a></li>
+            <li><a class="feedUrl" href="#"><span>Item headline</span></a></li>
+            <li><a class="feedUrl" href="#"><span>Item headline</span></a></li>
+            <li><a class="feedUrl" href="#"><span>Item headline</span></a></li>
+            <li><a class="feedUrl" href="#"><span>Item headline</span></a></li>
+        </ul>
     </div>
+    <div class="grid-item" th:remove="all">
+        <h3><a href="#"><span>Feed Name</span></a></h3>
+        <ul>
+            <li><a class="feedUrl" href="#"><span>Item headline</span></a></li>
+            <li><a class="feedUrl" href="#"><span>Item headline</span></a></li>
+            <li><a class="feedUrl" href="#"><span>Item headline</span></a></li>
+            <li><a class="feedUrl" href="#"><span>Item headline</span></a></li>
+            <li><a class="feedUrl" href="#"><span>Item headline</span></a></li>
+        </ul>
+    </div>
+    <div class="grid-item" th:remove="all">
+        <h3><a href="#"><span>Feed Name</span></a></h3>
+        <ul>
+            <li><a class="feedUrl" href="#"><span>Item headline</span></a></li>
+            <li><a class="feedUrl" href="#"><span>Item headline</span></a></li>
+            <li><a class="feedUrl" href="#"><span>Item headline</span></a></li>
+            <li><a class="feedUrl" href="#"><span>Item headline</span></a></li>
+            <li><a class="feedUrl" href="#"><span>Item headline</span></a></li>
+        </ul>
+    </div>
+    <div class="grid-item" th:remove="all">
+        <h3><a href="#"><span>Feed Name</span></a></h3>
+        <ul>
+            <li><a class="feedUrl" href="#"><span>Item headline</span></a></li>
+            <li><a class="feedUrl" href="#"><span>Item headline</span></a></li>
+            <li><a class="feedUrl" href="#"><span>Item headline</span></a></li>
+            <li><a class="feedUrl" href="#"><span>Item headline</span></a></li>
+            <li><a class="feedUrl" href="#"><span>Item headline</span></a></li>
+        </ul>
+    </div>
+    <div class="grid-item" th:remove="all">
+        <h3><a href="#"><span>Feed Name</span></a></h3>
+        <ul>
+            <li><a class="feedUrl" href="#"><span>Item headline</span></a></li>
+            <li><a class="feedUrl" href="#"><span>Item headline</span></a></li>
+            <li><a class="feedUrl" href="#"><span>Item headline</span></a></li>
+            <li><a class="feedUrl" href="#"><span>Item headline</span></a></li>
+            <li><a class="feedUrl" href="#"><span>Item headline</span></a></li>
+        </ul>
+    </div>
+
 </div>
+<!-- /Feeds -->
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
-<script type="text/javascript" src="feeds.js"></script>
+<script type="text/javascript" src="../static/feeds.js" th:src="@{'./feeds.js'}"></script>
 </body>
 </html>
