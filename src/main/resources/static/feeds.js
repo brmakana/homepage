@@ -1,17 +1,4 @@
 $(function () {
-    var elem = document.querySelector('.grid');
-    var msnry = new Masonry( elem, {
-        // options
-        itemSelector: '.grid-item',
-        columnWidth: 200
-    });
-
-    // element argument can be a selector string
-    //   for an individual element
-    var msnry = new Masonry( '.grid', {
-        // options
-    });
-
     /**
      * Returns the difference, in minutes, between now and the date stored in #lastModifiedDate
      * @returns {number}
@@ -68,6 +55,7 @@ $(function () {
                     feedUrl = $(this).attr("href");
                     if (feeds[feedUrl] == true) {
                         $(this).addClass("stale");
+                        $(this).parent(".grid-item").attr("data-read", "1");
                     }
                 });
             }
@@ -79,6 +67,17 @@ $(function () {
 
     var feeds = new Feeds($);
     feeds.shadeFeedLinks();
+
+    var elem = document.querySelector('.grid');
+    var iso = new Isotope( elem, {
+        getSortData: {
+            read: '[data-read]'
+        },
+        // options
+        itemSelector: '.grid-item',
+        layoutMode: 'fitRows',
+        sortBy: 'read'
+    });
 
     /**
      * Reload the page when the remaining time element is clicked

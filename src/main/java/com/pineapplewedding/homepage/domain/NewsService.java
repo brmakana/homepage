@@ -52,7 +52,7 @@ public class NewsService {
         newsFeedRepository.setNewsFeeds(newsFeeds);
     }
 
-    private List<String> getFeedUrls() {
+    protected List<String> getFeedUrls() {
         List<String> feedUrls = new ArrayList<String>();
 
         BufferedReader reader = null;
