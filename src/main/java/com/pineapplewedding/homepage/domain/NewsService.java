@@ -1,18 +1,17 @@
 package com.pineapplewedding.homepage.domain;
 
-import com.colorfulsoftware.rss.Channel;
-import com.colorfulsoftware.rss.Item;
-import com.colorfulsoftware.rss.RSS;
-import com.colorfulsoftware.rss.RSSDoc;
+import com.sun.syndication.feed.synd.SyndEntry;
+import com.sun.syndication.feed.synd.SyndFeed;
+import com.sun.syndication.io.SyndFeedInput;
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.io.input.BOMInputStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -45,7 +44,7 @@ public class NewsService {
                 NewsFeed feed = buildFeed(newsSite);
                 newsFeeds.add(feed);
             } catch (Exception ex) {
-                logger.error("Error trying to parse feed URL [" + newsSite + "]: {} ", ex.getMessage(), ex);
+                logger.error("Error trying to parse feed URL [" + newsSite + "]: {} ", ex.getMessage());
             }
         }
 
@@ -80,21 +79,28 @@ public class NewsService {
     }
 
     private NewsFeed buildFeed(String url) throws Exception {
-        RSS rss = new RSSDoc().readRSSToBean(new URL(url));
-        Channel channel = rss.getChannel();
+        String html = IOUtils.toString(new URL(url).openConnection()
+                .getInputStream());
+
+        BOMInputStream bomIn = new BOMInputStream(IOUtils.toInputStream(html));
+        String f = IOUtils.toString(bomIn);
+        Reader reader = new StringReader(f);
+
+        SyndFeedInput input = new SyndFeedInput();
+        SyndFeed feed = input.build(reader);
 
         NewsFeed newsFeed = new NewsFeed();
-        newsFeed.setName(channel.getTitle().getTitle());
-        newsFeed.setUrl(channel.getLink().getLink());
+        newsFeed.setName(feed.getTitle());
+        newsFeed.setUrl(feed.getLink());
 
-        if (channel.getItems() != null) {
+        if (feed.getEntries() != null && !feed.getEntries().isEmpty()) {
             int feedCount = 0;
-            Iterator<Item> iterator = channel.getItems().iterator();
-            while (iterator.hasNext() && feedCount <= MAX_PER_SOURCE) {
-                Item item = iterator.next();
+            Iterator i = feed.getEntries().iterator();
+            while (i.hasNext() && feedCount <= MAX_PER_SOURCE) {
+                SyndEntry entry = (SyndEntry) i.next();
                 FeedItem feedItem = new FeedItem();
-                feedItem.setUrl(item.getLink().getLink());
-                feedItem.setSubject(item.getTitle().getTitle());
+                feedItem.setUrl(entry.getLink());
+                feedItem.setSubject(entry.getTitle());
                 newsFeed.addFeedItem(feedItem);
                 feedCount++;
             }
