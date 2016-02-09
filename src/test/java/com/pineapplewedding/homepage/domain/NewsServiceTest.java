@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.ContextHierarchy;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -31,7 +32,9 @@ public class NewsServiceTest {
 
     @Configuration
     public static class TestConfig {
+
         @Bean
+        @Profile("default")
         public NewsService newsService() {
             return new TestNewsService();
         }
