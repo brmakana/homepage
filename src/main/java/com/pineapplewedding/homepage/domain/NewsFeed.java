@@ -42,4 +42,23 @@ public class NewsFeed {
     public void setFeedItems(List<FeedItem> feedItems) {
         this.feedItems = feedItems;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        NewsFeed newsFeed = (NewsFeed) o;
+
+        if (name != null ? !name.equals(newsFeed.name) : newsFeed.name != null) return false;
+        return url != null ? url.equals(newsFeed.url) : newsFeed.url == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + (url != null ? url.hashCode() : 0);
+        return result;
+    }
 }
