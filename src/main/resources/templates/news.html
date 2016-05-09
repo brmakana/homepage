@@ -5,39 +5,22 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
     <title th:text="${date}">Last Updated Date</title></head>
 <body>
-<script>
-    (function (i, s, o, g, r, a, m) {
-        i['GoogleAnalyticsObject'] = r;
-        i[r] = i[r] || function () {
-                    (i[r].q = i[r].q || []).push(arguments)
-                }, i[r].l = 1 * new Date();
-        a = s.createElement(o),
-                m = s.getElementsByTagName(o)[0];
-        a.async = 1;
-        a.src = g;
-        m.parentNode.insertBefore(a, m)
-    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-
-    ga('create', 'UA-30913560-2', 'pineapplewedding.com');
-    ga('send', 'pageview');
-
-</script>
 <link rel="stylesheet" type="text/css" href="../static/styles.css" th:href="@{'./styles.css'}"/>
 <!-- Wunderground -->
 <div align="center">
-    <span id="lastModifiedDate" th:text="${date}">Saturday January 30, 2016 10:00:04 AM PST</span><span class="remainingTime"></span>
+    <span id="lastModifiedDate" th:text="${date}">Saturday January 30, 2016 10:00:04 AM PST</span><span
+        class="remainingTime"></span>
     <span style="display: block !important; width: 320px; text-align: center; font-family: sans-serif; font-size: 12px;">
-        <a href="http://www.wunderground.com/cgi-bin/findweather/getForecast?query=zmw:98116.1.99999&amp;bannertypeclick=wu_clean2day"
+        <a href="http://www.wunderground.com/cgi-bin/findweather/getForecast?query=zmw:98116.1.99999&bannertypeclick=wu_clean2day"
            title="Seattle, Washington Weather Forecast" target="_blank">
-            <img src="http://weathersticker.wunderground.com/weathersticker/cgi-bin/banner/ban/wxBanner?bannertype=wu_clean2day_cond&amp;pwscode=KWASEATT155&amp;ForcedCity=Seattle&amp;ForcedState=WA&amp;zip=98116&amp;language=EN"
+            <img src="http://weathersticker.wunderground.com/weathersticker/cgi-bin/banner/ban/wxBanner?bannertype=wu_clean2day_cond&pwscode=KWASEATT447&ForcedCity=Seattle&ForcedState=WA&zip=98116&language=EN"
                  alt="Find more about Weather in Seattle, WA" width="300"/>
-        </a><br/>
-        <a href="http://www.wunderground.com/cgi-bin/findweather/getForecast?query=zmw:98116.1.99999&amp;bannertypeclick=wu_clean2day"
-           title="Get latest Weather Forecast updates"
-           style="font-family: sans-serif; font-size: 12px" target="_blank">Click for weather forecast</a>
+        </a>
+        <br>
+        <a href="http://www.wunderground.com/cgi-bin/findweather/getForecast?query=zmw:98116.1.99999&bannertypeclick=wu_clean2day"
+           title="Get latest Weather Forecast updates" style="font-family: sans-serif; font-size: 12px" target="_blank">Click for weather forecast</a>
     </span>
 </div>
-<div align="center"><a class="gothic" href="ttrss">rss</a></div>
 <!-- /Wunderground -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/2.2.2/isotope.pkgd.min.js"></script>
 <!-- Feeds -->
@@ -45,7 +28,8 @@
     <div class="grid-item" th:each="newsFeed : ${feeds}">
         <h3><a href="#" th:href="${newsFeed.url}"><span th:text="${newsFeed.name}">Feed Name</span></a></h3>
         <ul>
-            <li th:each="feedItem : ${newsFeed.feedItems}"><a class="feedUrl" href="#" th:href="${feedItem.url}"><span th:text="${feedItem.subject}">Item headline</span></a></li>
+            <li th:each="feedItem : ${newsFeed.feedItems}"><a class="feedUrl" href="#" th:href="${feedItem.url}"><span
+                    th:text="${feedItem.subject}">Item headline</span></a></li>
         </ul>
     </div><!--/* mock data */-->
     <div class="grid-item" th:remove="all">
@@ -103,5 +87,22 @@
 <!-- /Feeds -->
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="../static/feeds.js" th:src="@{'./feeds.js'}"></script>
+<script>
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-30913560-2', 'pineapplewedding.com');
+    ga('send', 'pageview');
+
+</script>
 </body>
 </html>
