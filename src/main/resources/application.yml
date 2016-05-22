@@ -1,0 +1,14 @@
+spring:
+  jmx:
+    enabled: false
+  resources:
+    chain:
+      cache: true
+      strategy:
+        content:
+          enabled: true
+          paths: /**
+
+error:
+  whitelabel:
+    enabled: false

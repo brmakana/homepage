@@ -1,4 +1,4 @@
-package com.pineapplewedding.homepage;
+package io.makana.homepage;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
