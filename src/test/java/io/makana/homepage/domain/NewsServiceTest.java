@@ -1,15 +1,13 @@
-package com.pineapplewedding.homepage.domain;
+package io.makana.homepage.domain;
 
-import com.pineapplewedding.homepage.HomepageApplication;
+import io.makana.homepage.HomepageApplication;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.ContextHierarchy;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
 
 import javax.annotation.Resource;
 

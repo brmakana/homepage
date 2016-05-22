@@ -1,4 +1,4 @@
-package com.pineapplewedding.homepage.domain;
+package io.makana.homepage.domain;
 
 import com.rometools.rome.feed.synd.SyndEntry;
 import com.rometools.rome.feed.synd.SyndFeed;

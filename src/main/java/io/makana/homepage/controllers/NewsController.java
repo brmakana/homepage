@@ -1,7 +1,7 @@
-package com.pineapplewedding.homepage.controllers;
+package io.makana.homepage.controllers;
 
-import com.pineapplewedding.homepage.domain.NewsFeed;
-import com.pineapplewedding.homepage.domain.NewsFeedRepository;
+import io.makana.homepage.domain.NewsFeed;
+import io.makana.homepage.domain.NewsFeedRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;

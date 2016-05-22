@@ -1,8 +1,7 @@
-package com.pineapplewedding.homepage.controllers;
+package io.makana.homepage.controllers;
 
-import com.pineapplewedding.homepage.domain.NewsService;
+import io.makana.homepage.domain.NewsService;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
