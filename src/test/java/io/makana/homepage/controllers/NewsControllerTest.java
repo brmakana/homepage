@@ -1,6 +1,6 @@
-package com.pineapplewedding.homepage.controllers;
+package io.makana.homepage.controllers;
 
-import com.pineapplewedding.homepage.HomepageApplication;
+import io.makana.homepage.HomepageApplication;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

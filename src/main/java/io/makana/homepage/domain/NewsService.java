@@ -1,4 +1,4 @@
-package com.pineapplewedding.homepage.domain;
+package io.makana.homepage.domain;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

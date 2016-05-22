@@ -1,4 +1,4 @@
-package com.pineapplewedding.homepage.domain;
+package io.makana.homepage.domain;
 
 public class FeedItem {
     private String subject;

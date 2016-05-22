@@ -1,4 +1,4 @@
-package com.pineapplewedding.homepage.controllers;
+package io.makana.homepage.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;

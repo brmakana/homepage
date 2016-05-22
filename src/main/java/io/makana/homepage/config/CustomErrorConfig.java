@@ -1,4 +1,4 @@
-package com.pineapplewedding.homepage.config;
+package io.makana.homepage.config;
 
 import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletContainer;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
