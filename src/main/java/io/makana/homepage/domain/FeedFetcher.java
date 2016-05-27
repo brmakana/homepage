@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import java.io.Reader;
 import java.io.StringReader;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.Iterator;
 
 @Component
@@ -18,7 +19,9 @@ public class FeedFetcher {
     public static final int MAX_PER_SOURCE = 20;
 
     public NewsFeed buildFeed(String url) throws Exception {
-        String html = IOUtils.toString(new URL(url).openConnection().getInputStream());
+        URLConnection urlConnection = new URL(url).openConnection();
+        urlConnection.setRequestProperty("User-Agent", "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.4; en-US; rv:1.9.2.2) Gecko/20100316 Firefox/3.6.2");
+        String html = IOUtils.toString(urlConnection.getInputStream());
 
         BOMInputStream bomIn = new BOMInputStream(IOUtils.toInputStream(html));
         String f = IOUtils.toString(bomIn);
