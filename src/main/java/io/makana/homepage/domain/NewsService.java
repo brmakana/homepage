@@ -35,7 +35,7 @@ public class NewsService {
                 NewsFeed feed = feedFetcher.buildFeed(newsSite);
                 newNewsFeeds.add(feed);
             } catch (Exception ex) {
-                logger.error("Error trying to parse feed URL [" + newsSite + "]: {} ", ex.getMessage());
+                logger.error("Error trying to parse feed URL [" + newsSite + "]: {} ", ex.getMessage(), ex);
             }
         }
         List<NewsFeed> existingFeeds = newsFeedRepository.getNewsFeeds();
