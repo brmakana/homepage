@@ -30,6 +30,9 @@ public class FeedFetcher {
         NewsFeed newsFeed = new NewsFeed();
         newsFeed.setName(feed.getTitle());
         newsFeed.setUrl(feed.getLink());
+        if (feed.getImage().getUrl() != null && !feed.getImage().getUrl().isEmpty()) {
+            newsFeed.setImageUrl(feed.getImage().getUrl());
+        }
 
         if (feed.getEntries() != null && !feed.getEntries().isEmpty()) {
             int feedCount = 0;

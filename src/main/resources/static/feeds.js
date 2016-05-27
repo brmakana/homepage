@@ -69,14 +69,10 @@ $(function () {
     feeds.shadeFeedLinks();
 
     var elem = document.querySelector('.grid');
-    var iso = new Isotope( elem, {
-        getSortData: {
-            read: '[data-read]'
-        },
+    var pckry = new Packery( elem, {
         // options
         itemSelector: '.grid-item',
-        layoutMode: 'fitRows',
-        sortBy: 'read'
+        gutter: 0
     });
 
     /**
