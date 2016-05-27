@@ -60,9 +60,7 @@ public class NewsFeed {
         NewsFeed newsFeed = (NewsFeed) o;
 
         if (name != null ? !name.equals(newsFeed.name) : newsFeed.name != null) return false;
-        if (url != null ? !url.equals(newsFeed.url) : newsFeed.url != null) return false;
-        if (imageUrl != null ? !imageUrl.equals(newsFeed.imageUrl) : newsFeed.imageUrl != null) return false;
-        return feedItems != null ? feedItems.equals(newsFeed.feedItems) : newsFeed.feedItems == null;
+        return url != null ? url.equals(newsFeed.url) : newsFeed.url == null;
 
     }
 
@@ -70,8 +68,6 @@ public class NewsFeed {
     public int hashCode() {
         int result = name != null ? name.hashCode() : 0;
         result = 31 * result + (url != null ? url.hashCode() : 0);
-        result = 31 * result + (imageUrl != null ? imageUrl.hashCode() : 0);
-        result = 31 * result + (feedItems != null ? feedItems.hashCode() : 0);
         return result;
     }
 }
