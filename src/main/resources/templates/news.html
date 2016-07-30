@@ -8,6 +8,7 @@
 <link rel="stylesheet" type="text/css" href="../static/styles.css" th:href="@{'./styles.css'}"/>
 <!-- Wunderground -->
 <div align="center">
+    <div>
     <span id="lastModifiedDate" th:text="${date}">Saturday January 30, 2016 10:00:04 AM PST</span><span
         class="remainingTime"></span>
     <span style="display: block !important; width: 320px; text-align: center; font-family: sans-serif; font-size: 12px;">
@@ -16,10 +17,17 @@
             <img src="http://weathersticker.wunderground.com/weathersticker/cgi-bin/banner/ban/wxBanner?bannertype=wu_clean2day_cond&amp;pwscode=KWASEATT447&amp;ForcedCity=Seattle&amp;ForcedState=WA&amp;zip=98116&amp;language=EN"
                  alt="Find more about Weather in Seattle, WA" width="300"/>
         </a>
-        <br/>
+    </span>
+    <span>
         <a href="http://www.wunderground.com/cgi-bin/findweather/getForecast?query=zmw:98116.1.99999&amp;bannertypeclick=wu_clean2day"
            title="Get latest Weather Forecast updates" style="font-family: sans-serif; font-size: 12px" target="_blank">Click for weather forecast</a>
     </span>
+    </div>
+    <div>
+    <span>
+        <a href="http://www.electoral-vote.com"><img border="0" src="http://www.electoral-vote.com/evp2016/Icons/evwider.png" alt="Click for www.electoral-vote.com" width="375" height="120" /></a>
+    </span>
+    </div>
 </div>
 <!-- /Wunderground -->
 <script src="https://npmcdn.com/packery@2.0/dist/packery.pkgd.min.js"></script>
