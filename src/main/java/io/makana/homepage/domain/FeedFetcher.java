@@ -16,7 +16,17 @@ import java.util.Iterator;
 @Component
 public class FeedFetcher {
 
-    public static final int MAX_PER_SOURCE = 20;
+    public static final int DEFAULT_MAX_PER_SOURCE = 10;
+    private int maxPerSource = DEFAULT_MAX_PER_SOURCE;
+
+
+    public FeedFetcher() {
+
+    }
+
+    public FeedFetcher(int maxPerSource) {
+        this.maxPerSource = maxPerSource;
+    }
 
     public NewsFeed buildFeed(String url) throws Exception {
         URLConnection urlConnection = new URL(url).openConnection();
@@ -42,7 +52,7 @@ public class FeedFetcher {
         if (feed.getEntries() != null && !feed.getEntries().isEmpty()) {
             int feedCount = 0;
             Iterator i = feed.getEntries().iterator();
-            while (i.hasNext() && feedCount <= MAX_PER_SOURCE) {
+            while (i.hasNext() && feedCount <= maxPerSource) {
                 SyndEntry entry = (SyndEntry) i.next();
                 FeedItem feedItem = new FeedItem();
                 feedItem.setUrl(entry.getLink());
@@ -52,5 +62,16 @@ public class FeedFetcher {
             }
         }
         return newsFeed;
+    }
+
+    public int getMaxPerSource() {
+        return maxPerSource;
+    }
+
+    public void setMaxPerSource(int maxPerSource) {
+        if (maxPerSource <= 0 || maxPerSource > DEFAULT_MAX_PER_SOURCE) {
+            throw new IllegalArgumentException(String.valueOf(maxPerSource));
+        }
+        this.maxPerSource = maxPerSource;
     }
 }

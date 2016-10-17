@@ -6,15 +6,24 @@
     <title th:text="${date}">Last Updated Date</title></head>
 <body>
 <link rel="stylesheet" type="text/css" href="../static/styles.css" th:href="@{'./styles.css'}"/>
+<meta name="generator" content="Bootply" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<!--[if lt IE 9]>
+<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<link href="css/styles.css" rel="stylesheet">
+
+
 <!-- Wunderground -->
 <div align="center">
     <div>
     <span id="lastModifiedDate" th:text="${date}">Saturday January 30, 2016 10:00:04 AM PST</span><span
         class="remainingTime"></span>
     <span style="display: block !important; width: 320px; text-align: center; font-family: sans-serif; font-size: 12px;">
-        <a href="http://www.wunderground.com/cgi-bin/findweather/getForecast?query=zmw:98116.1.99999&amp;bannertypeclick=wu_clean2day"
-           title="Seattle, Washington Weather Forecast" target="_blank">
-            <img src="http://weathersticker.wunderground.com/weathersticker/cgi-bin/banner/ban/wxBanner?bannertype=wu_clean2day_cond&amp;pwscode=KWASEATT447&amp;ForcedCity=Seattle&amp;ForcedState=WA&amp;zip=98116&amp;language=EN"
+        <a href="http://www.wunderground.com/cgi-bin/findweather/getForecast?query=zmw:98166.1.99999&amp;bannertypeclick=wu_clean2day"
+           title="Burien, Washington Weather Forecast" target="_blank">
+            <img src="http://weathersticker.wunderground.com/weathersticker/cgi-bin/banner/ban/wxBanner?bannertype=wu_clean2day_cond&amp;pwscode=KWABURIE14&amp;ForcedCity=Burien&amp;ForcedState=WA&amp;zip=98166&amp;language=EN"
                  alt="Find more about Weather in Seattle, WA" width="300"/>
         </a>
     </span>
