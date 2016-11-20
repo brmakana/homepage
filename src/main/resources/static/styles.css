@@ -10,8 +10,16 @@
     max-width: 80%;
     margin: 5px auto;
 }
+.grid-item-centered {
+    margin: auto;
+    width: 35%;
+    padding: 10px;
+}
 .grid-item {
     width: 50%;
+}
+.grid-item--width2 {
+    width: 100%;
 }
 
 ul {
