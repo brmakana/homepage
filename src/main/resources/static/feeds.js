@@ -75,6 +75,22 @@ $(function () {
         gutter: 0
     });
 
+    var onload = function () {
+        pckry.shiftLayout();
+    }
+
+    var weatherImg = document.getElementById("weatherImg");
+    if (weatherImg.complete) {
+        onload()
+    } else {
+        weatherImg.addEventListener('load', onload)
+        weatherImg.addEventListener('error', function() {
+            if (console && console.log) {
+                console.log("Error loading weather image")
+            }
+        })
+    }
+
     /**
      * Reload the page when the remaining time element is clicked
      */
