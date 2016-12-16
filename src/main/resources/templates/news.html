@@ -20,13 +20,6 @@
         <span id="lastModifiedDate" th:text="${date}">Saturday January 30, 2016 10:00:04 AM PST</span><span
             class="remainingTime"></span>
     </div>
-    <div class="grid-item">
-        <a href="http://www.wunderground.com/cgi-bin/findweather/getForecast?query=zmw:98166.1.99999&amp;bannertypeclick=wu_clean2day"
-           title="Burien, Washington Weather Forecast" target="_blank">
-            <img id="weatherImg" src="http://weathersticker.wunderground.com/weathersticker/cgi-bin/banner/ban/wxBanner?bannertype=wu_clean2day_cond&amp;pwscode=KWABURIE14&amp;ForcedCity=Burien&amp;ForcedState=WA&amp;zip=98166&amp;language=EN"
-                 alt="Find more about Weather in Three Tree Point, WA" width="300"/>
-        </a>
-    </div>
     <!-- Feeds -->
     <div class="grid-item" th:each="newsFeed : ${feeds}">
         <h3><a href="#" th:href="${newsFeed.url}"><img th:if="${not #strings.isEmpty(newsFeed.imageUrl)}"

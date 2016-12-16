@@ -7,7 +7,9 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Component
 public class NewsService {
@@ -24,29 +26,21 @@ public class NewsService {
     private static final Logger logger = LoggerFactory.getLogger(NewsService.class);
 
 
-    @Scheduled(cron = "0 0/45 * * * *")
+//    @Scheduled(cron = "0 0/45 * * * *")
     public void buildNewsFeeds() {
         logger.info("Updating news feeds...");
-        List<NewsFeed> newNewsFeeds = new ArrayList<NewsFeed>();
+        List<NewsFeed> news = new ArrayList<>();
         List<String> newsFeedUrls = feedUrlRepository.getFeedUrls();
         for (String newsSite : newsFeedUrls) {
             try {
-                logger.info("Parsing {}", newsSite);
+                logger.info("Fetching {}", newsSite);
                 NewsFeed feed = feedFetcher.buildFeed(newsSite);
-                newNewsFeeds.add(feed);
+                news.add(feed);
             } catch (Exception ex) {
                 logger.error("Error trying to parse feed URL [" + newsSite + "]: {} ", ex.getMessage(), ex);
             }
         }
-        List<NewsFeed> existingFeeds = newsFeedRepository.getNewsFeeds();
-        if (newNewsFeeds != null) {
-            for (NewsFeed f : existingFeeds) {
-                if (!newNewsFeeds.contains(f)) {
-                    newNewsFeeds.add(f);
-                }
-            }
-        }
-        newsFeedRepository.setNewsFeeds(newNewsFeeds);
+        newsFeedRepository.setNewsFeeds(news);
     }
 
     public NewsFeedRepository getNewsFeedRepository() {

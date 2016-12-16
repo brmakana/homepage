@@ -3,6 +3,7 @@ package io.makana.homepage.domain;
 import io.makana.homepage.HomepageApplication;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.ContextConfiguration;
@@ -13,6 +14,7 @@ import javax.annotation.Resource;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 import static org.junit.Assert.*;
 import static org.mockito.Matchers.eq;
@@ -20,10 +22,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextHierarchy( {
-        @ContextConfiguration(name = "parent", classes = HomepageApplication.class),
-        @ContextConfiguration(name = "child", classes = NewsServiceTest.TestConfig.class)
-})
+@SpringBootTest(classes = NewsServiceTest.TestConfig.class)
 public class NewsServiceTest {
 
     @Resource
@@ -40,8 +39,9 @@ public class NewsServiceTest {
         NewsFeed a = new NewsFeed();
         a.setName("A");
         a.setUrl("A URL");
-        assertTrue(newsFeeds.contains(a));
         assertEquals(3, newsFeeds.size());
+        assertTrue(newsFeeds.contains(a));
+
     }
 
     @Test
@@ -57,7 +57,6 @@ public class NewsServiceTest {
 
     @Configuration
     public static class TestConfig {
-
         @Bean
         public FeedFetcher feedFetcher() throws Exception {
             FeedItem item = new FeedItem();
@@ -82,8 +81,8 @@ public class NewsServiceTest {
 
             FeedFetcher feedFetcher = mock(FeedFetcher.class);
             when(feedFetcher.buildFeed(eq("a"))).thenReturn(a);
-            when(feedFetcher.buildFeed(eq("b"))).thenReturn(a);
-            when(feedFetcher.buildFeed(eq("c"))).thenReturn(a);
+            when(feedFetcher.buildFeed(eq("b"))).thenReturn(b);
+            when(feedFetcher.buildFeed(eq("c"))).thenReturn(c);
             return feedFetcher;
         }
 
@@ -92,6 +91,16 @@ public class NewsServiceTest {
             FeedUrlRepository repo = mock(FeedUrlRepository.class);
             when(repo.getFeedUrls()).thenReturn(Arrays.asList("a", "b", "c"));
             return repo;
+        }
+
+        @Bean
+        public NewsService newsService() {
+            return new NewsService();
+        }
+
+        @Bean
+        public NewsFeedRepository newsFeedRepository() {
+            return new NewsFeedRepository();
         }
     }
 }

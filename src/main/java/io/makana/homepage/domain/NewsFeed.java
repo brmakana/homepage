@@ -59,15 +59,14 @@ public class NewsFeed {
 
         NewsFeed newsFeed = (NewsFeed) o;
 
-        if (name != null ? !name.equals(newsFeed.name) : newsFeed.name != null) return false;
-        return url != null ? url.equals(newsFeed.url) : newsFeed.url == null;
-
+        if (getName() != null ? !getName().equals(newsFeed.getName()) : newsFeed.getName() != null) return false;
+        return getUrl() != null ? getUrl().equals(newsFeed.getUrl()) : newsFeed.getUrl() == null;
     }
 
     @Override
     public int hashCode() {
-        int result = name != null ? name.hashCode() : 0;
-        result = 31 * result + (url != null ? url.hashCode() : 0);
+        int result = getName() != null ? getName().hashCode() : 0;
+        result = 31 * result + (getUrl() != null ? getUrl().hashCode() : 0);
         return result;
     }
 }
