@@ -26,7 +26,7 @@ public class NewsService {
     private static final Logger logger = LoggerFactory.getLogger(NewsService.class);
 
 
-//    @Scheduled(cron = "0 0/45 * * * *")
+    @Scheduled(cron = "0 0/45 * * * *")
     public void buildNewsFeeds() {
         logger.info("Updating news feeds...");
         List<NewsFeed> news = new ArrayList<>();
