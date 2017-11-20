@@ -25,58 +25,59 @@
                                                        th:src="${newsFeed.imageUrl}"/> <span
                 th:if="${#strings.isEmpty(newsFeed.imageUrl)}" th:text="${newsFeed.name}">Feed Name</span></a></h3>
         <ul>
-            <li th:each="feedItem : ${newsFeed.feedItems}"><a class="feedUrl" href="#" th:href="${feedItem.url}"><span
-                    th:text="${feedItem.subject}">Item headline</span></a></li>
+            <li th:each="feedItem : ${newsFeed.feedItems}">
+                <a class="feedUrl" href="#" th:href="${feedItem.url}"><span
+                    th:text="${feedItem.subject}">Item headline</span></a>&nbsp;&nbsp;&nbsp;<span th:if="${feedItem.authorName ne newsFeed.feedItems.get(0).authorName}" class="authorName" th:text="${feedItem.authorName}">domain.com</span></li>
         </ul>
     </div><!--/* mock data */-->
     <div class="grid-item" th:remove="all">
         <h3><a href="#"><span>Feed Name</span></a></h3>
         <ul>
-            <li><a class="feedUrl" href="#"><span>Item headline</span></a></li>
-            <li><a class="feedUrl" href="#"><span>Item headline</span></a></li>
-            <li><a class="feedUrl" href="#"><span>Item headline</span></a></li>
-            <li><a class="feedUrl" href="#"><span>Item headline</span></a></li>
-            <li><a class="feedUrl" href="#"><span>Item headline</span></a></li>
+            <li><a class="feedUrl" href="#"><span>Item headline</span></a>&nbsp;&nbsp;&nbsp;<span class="authorName">domain.com</span></li>
+            <li><a class="feedUrl" href="#"><span>Item headline</span></a>&nbsp;&nbsp;&nbsp;</li>
+            <li><a class="feedUrl" href="#"><span>Item headline</span></a>&nbsp;&nbsp;&nbsp;</li>
+            <li><a class="feedUrl" href="#"><span>Item headline</span></a>&nbsp;&nbsp;&nbsp;<span class="authorName">domain.com</span></li>
+            <li><a class="feedUrl" href="#"><span>Item headline</span></a>&nbsp;&nbsp;&nbsp;<span class="authorName">domain.com</span></li>
         </ul>
     </div>
     <div class="grid-item" th:remove="all">
         <h3><a href="#"><span>Unread Feed Name</span></a></h3>
         <ul>
-            <li><a class="feedUrl" href="#"><span>Unread Item headline</span></a></li>
-            <li><a class="feedUrl" href="#"><span>Unread Item headline</span></a></li>
-            <li><a class="feedUrl" href="#"><span>Unread Item headline</span></a></li>
-            <li><a class="feedUrl" href="#"><span>Unread Item headline</span></a></li>
-            <li><a class="feedUrl" href="#"><span>Unread Item headline</span></a></li>
+            <li><a class="feedUrl" href="#"><span>Unread Item headline</span></a>&nbsp;&nbsp;&nbsp;<span class="authorName">domain.com</span></li>
+            <li><a class="feedUrl" href="#"><span>Unread Item headline</span></a>&nbsp;&nbsp;&nbsp;<span class="authorName">domain.com</span></li>
+            <li><a class="feedUrl" href="#"><span>Unread Item headline</span></a>&nbsp;&nbsp;&nbsp;<span class="authorName">domain.com</span></li>
+            <li><a class="feedUrl" href="#"><span>Unread Item headline</span></a>&nbsp;&nbsp;&nbsp;<span class="authorName">domain.com</span></li>
+            <li><a class="feedUrl" href="#"><span>Unread Item headline</span></a>&nbsp;&nbsp;&nbsp;<span class="authorName">domain.com</span></li>
         </ul>
     </div>
     <div class="grid-item" th:remove="all">
         <h3><a href="#"><span>Feed Name</span></a></h3>
         <ul>
-            <li><a class="feedUrl" href="#"><span>Item headline</span></a></li>
-            <li><a class="feedUrl" href="#"><span>Item headline</span></a></li>
-            <li><a class="feedUrl" href="#"><span>Item headline</span></a></li>
-            <li><a class="feedUrl" href="#"><span>Item headline</span></a></li>
-            <li><a class="feedUrl" href="#"><span>Item headline</span></a></li>
+            <li><a class="feedUrl" href="#"><span>Item headline</span></a>&nbsp;&nbsp;&nbsp;<span class="authorName">domain.com</span></li>
+            <li><a class="feedUrl" href="#"><span>Item headline</span></a>&nbsp;&nbsp;&nbsp;<span class="authorName">domain.com</span></li>
+            <li><a class="feedUrl" href="#"><span>Item headline</span></a>&nbsp;&nbsp;&nbsp;<span class="authorName">domain.com</span></li>
+            <li><a class="feedUrl" href="#"><span>Item headline</span></a>&nbsp;&nbsp;&nbsp;<span class="authorName">domain.com</span></li>
+            <li><a class="feedUrl" href="#"><span>Item headline</span></a>&nbsp;&nbsp;&nbsp;<span class="authorName">domain.com</span></li>
         </ul>
     </div>
     <div class="grid-item" th:remove="all">
         <h3><a href="#"><span>Feed Name</span></a></h3>
         <ul>
-            <li><a class="feedUrl" href="#"><span>Item headline</span></a></li>
-            <li><a class="feedUrl" href="#"><span>Item headline</span></a></li>
-            <li><a class="feedUrl" href="#"><span>Item headline</span></a></li>
-            <li><a class="feedUrl" href="#"><span>Item headline</span></a></li>
-            <li><a class="feedUrl" href="#"><span>Item headline</span></a></li>
+            <li><a class="feedUrl" href="#"><span>Item headline</span></a>&nbsp;&nbsp;&nbsp;<span class="authorName">domain.com</span></li>
+            <li><a class="feedUrl" href="#"><span>Item headline</span></a>&nbsp;&nbsp;&nbsp;<span class="authorName">domain.com</span></li>
+            <li><a class="feedUrl" href="#"><span>Item headline</span></a>&nbsp;&nbsp;&nbsp;<span class="authorName">domain.com</span></li>
+            <li><a class="feedUrl" href="#"><span>Item headline</span></a>&nbsp;&nbsp;&nbsp;<span class="authorName">domain.com</span></li>
+            <li><a class="feedUrl" href="#"><span>Item headline</span></a>&nbsp;&nbsp;&nbsp;<span class="authorName">domain.com</span></li>
         </ul>
     </div>
     <div class="grid-item" th:remove="all">
         <h3><a href="#"><span>Feed Name</span></a></h3>
         <ul>
-            <li><a class="feedUrl" href="#"><span>Item headline</span></a></li>
-            <li><a class="feedUrl" href="#"><span>Item headline</span></a></li>
-            <li><a class="feedUrl" href="#"><span>Item headline</span></a></li>
-            <li><a class="feedUrl" href="#"><span>Item headline</span></a></li>
-            <li><a class="feedUrl" href="#"><span>Item headline</span></a></li>
+            <li><a class="feedUrl" href="#"><span>Item headline</span></a>&nbsp;&nbsp;&nbsp;<span class="authorName">domain.com</span></li>
+            <li><a class="feedUrl" href="#"><span>Item headline</span></a>&nbsp;&nbsp;&nbsp;<span class="authorName">domain.com</span></li>
+            <li><a class="feedUrl" href="#"><span>Item headline</span></a>&nbsp;&nbsp;&nbsp;<span class="authorName">domain.com</span></li>
+            <li><a class="feedUrl" href="#"><span>Item headline</span></a>&nbsp;&nbsp;&nbsp;<span class="authorName">domain.com</span></li>
+            <li><a class="feedUrl" href="#"><span>Item headline</span></a>&nbsp;&nbsp;&nbsp;<span class="authorName">domain.com</span></li>
         </ul>
     </div>
 

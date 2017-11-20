@@ -45,6 +45,7 @@ public class NewsService {
             }
         }
         newsFeedRepository.setNewsFeeds(news);
+        logger.info("Update complete");
     }
 
     public NewsFeedRepository getNewsFeedRepository() {

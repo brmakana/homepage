@@ -34,9 +34,8 @@ ul li {
 }
 
 ul li:hover {
-    color: #fec425;
-    background-color: #fec425;
 
+    background-color: #fec425;
 }
 
 h3 {
@@ -51,6 +50,22 @@ a {
     color: #333333;
     font-size: small;
     font-family: Century Gothic, sans-serif;
+}
+
+.authorName {
+    color: #DAD1D1;
+    font-size: 75%;
+}
+ul li:hover > a {
+    color: #333333;
+}
+
+ul li:hover > .authorName {
+    color: #333333;
+}
+
+.authorName:hover {
+    color: #333333;
 }
 
 .stale {
