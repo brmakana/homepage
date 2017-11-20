@@ -32,16 +32,18 @@ public class NewsServiceTest {
     private NewsFeedRepository newsFeedRepository;
 
     @Test
-    public void testBuildNewsFeeds() throws Exception {
+    public void testFixesBrokenTLD() throws Exception {
         newsService.buildNewsFeeds();
 
         List<NewsFeed> newsFeeds = newsFeedRepository.getNewsFeeds();
-        NewsFeed a = new NewsFeed();
-        a.setName("A");
-        a.setUrl("A URL");
         assertEquals(3, newsFeeds.size());
-        assertTrue(newsFeeds.contains(a));
-
+        assertEquals(1, newsFeeds.stream()
+                .filter(
+                        (NewsFeed feed) ->
+                                feed.getUrl().contains("news.google.com/") &&
+                                feed.getName().equals("A")
+                ).count()
+        );
     }
 
     @Test
@@ -65,7 +67,7 @@ public class NewsServiceTest {
 
             NewsFeed a = new NewsFeed();
             a.setName("A");
-            a.setUrl("A URL");
+            a.setUrl("https://news.google.coms/news/rss/?gl=US&ned=us&hl=en");
             a.setFeedItems(Arrays.asList(item));
 
             NewsFeed b = new NewsFeed();

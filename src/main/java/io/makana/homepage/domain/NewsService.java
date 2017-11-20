@@ -35,12 +35,17 @@ public class NewsService {
             try {
                 logger.info("Fetching {}", newsSite);
                 NewsFeed feed = feedFetcher.buildFeed(newsSite);
+                // @todo workaround for broken google
+                if (feed != null && feed.getUrl() != null && !feed.getUrl().isEmpty()) {
+                    feed.setUrl(feed.getUrl().replaceAll("\\.coms/", "\\.com/"));
+                }
                 news.add(feed);
             } catch (Exception ex) {
                 logger.error("Error trying to parse feed URL [" + newsSite + "]: {} ", ex.getMessage(), ex);
             }
         }
         newsFeedRepository.setNewsFeeds(news);
+        logger.info("Update complete");
     }
 
     public NewsFeedRepository getNewsFeedRepository() {
