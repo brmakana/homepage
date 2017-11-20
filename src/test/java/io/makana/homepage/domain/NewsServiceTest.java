@@ -40,7 +40,7 @@ public class NewsServiceTest {
         assertEquals(1, newsFeeds.stream()
                 .filter(
                         (NewsFeed feed) ->
-                                feed.getUrl().contains("news.google.com/") &&
+                                feed.getUrl().contains("https://news.google.com") &&
                                 feed.getName().equals("A")
                 ).count()
         );

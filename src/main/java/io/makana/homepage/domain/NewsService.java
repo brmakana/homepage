@@ -37,7 +37,7 @@ public class NewsService {
                 NewsFeed feed = feedFetcher.buildFeed(newsSite);
                 // @todo workaround for broken google
                 if (feed != null && feed.getUrl() != null && !feed.getUrl().isEmpty()) {
-                    feed.setUrl(feed.getUrl().replaceAll("\\.coms/", "\\.com/"));
+                    feed.setUrl(feed.getUrl().replaceAll("\\.google.com", "https://news.google.com"));
                 }
                 news.add(feed);
             } catch (Exception ex) {
