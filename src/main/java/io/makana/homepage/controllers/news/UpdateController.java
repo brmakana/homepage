@@ -1,6 +1,6 @@
-package io.makana.homepage.controllers;
+package io.makana.homepage.controllers.news;
 
-import io.makana.homepage.domain.NewsService;
+import io.makana.homepage.domain.news.NewsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
