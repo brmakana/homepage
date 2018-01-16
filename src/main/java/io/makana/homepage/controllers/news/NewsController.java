@@ -1,7 +1,7 @@
-package io.makana.homepage.controllers;
+package io.makana.homepage.controllers.news;
 
-import io.makana.homepage.domain.NewsFeed;
-import io.makana.homepage.domain.NewsFeedRepository;
+import io.makana.homepage.domain.news.NewsFeed;
+import io.makana.homepage.domain.news.NewsFeedRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -12,7 +12,6 @@ import javax.annotation.Resource;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 import java.util.TimeZone;
 
 @Controller

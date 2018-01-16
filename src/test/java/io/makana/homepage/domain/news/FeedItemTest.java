@@ -1,5 +1,6 @@
-package io.makana.homepage.domain;
+package io.makana.homepage.domain.news;
 
+import io.makana.homepage.domain.news.FeedItem;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

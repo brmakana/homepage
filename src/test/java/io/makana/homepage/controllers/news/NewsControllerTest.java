@@ -1,4 +1,4 @@
-package io.makana.homepage.controllers;
+package io.makana.homepage.controllers.news;
 
 import io.makana.homepage.HomepageApplication;
 import org.junit.Before;
