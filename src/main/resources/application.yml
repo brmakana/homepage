@@ -1,5 +1,9 @@
 server:
   use-forward-headers: true
+  error:
+    whitelabel:
+      enabled: false
+
 spring:
   jmx:
     enabled: false
@@ -10,7 +14,3 @@ spring:
         content:
           enabled: true
           paths: /**
-
-error:
-  whitelabel:
-    enabled: false

@@ -8,7 +8,7 @@ $(function () {
         var now = new Date();
         var minutes = Math.round((now - lastModDate) / 1000 / 60);
         return minutes;
-    };
+    }
 
     function Feeds($) {
 
@@ -53,7 +53,7 @@ $(function () {
                 // next, check each feed to see if it's been seen before, and if so colorize it
                 $(".feedUrl").each(function () {
                     feedUrl = $(this).attr("href");
-                    if (feeds[feedUrl] == true) {
+                    if (feeds[feedUrl] === true) {
                         $(this).addClass("stale");
                         $(this).parent(".grid-item").attr("data-read", "1");
                     }
@@ -63,38 +63,23 @@ $(function () {
             feeds = parseFeeds();
             saveFeeds(feeds);
         };
-
-        this.sortFeeds = function () {
-            var feeds = loadFeeds();
-            if (feeds) {
-                $(".grid-item").each(function () {
-                    var feed = $(this);
-                    var hasUnread = false;
-                    feed.find(".stale").each(function () {
-                        hasUnread = true;
-                    });
-                    if (!hasUnread) {
-                       feed.detach().appendTo($(".grid"))
-                    }
-                });
-            }
-        };
     }
 
     var feeds = new Feeds($);
     feeds.shadeFeedLinks();
-    feeds.sortFeeds();
 
-    var elem = document.querySelector('.grid');
-    var pckry = new Packery( elem, {
-        // options
+    $(".grid").isotope({
+        getSortData: {
+            weight: function(itemElem) {
+                var unreadLinkCount = $( itemElem ).find('.stale').length;
+                console.log("element " + itemElem.id + " has weight " + unreadLinkCount);
+                return unreadLinkCount;
+            }
+        },
+        layoutMode: 'packery',
         itemSelector: '.grid-item',
-        gutter: 0
+        sortBy: 'weight'
     });
-
-    var onload = function () {
-        pckry.shiftLayout();
-    };
 
     /**
      * Reload the page when the remaining time element is clicked
@@ -107,7 +92,7 @@ $(function () {
      *
      * @type {number}
      */
-    var timerId = setInterval(function () {
+    setInterval(function () {
         var elapsedTime = getElapsedTime();
         $(".remainingTime").html(elapsedTime + " minutes ago");
         if (elapsedTime > 45) {
