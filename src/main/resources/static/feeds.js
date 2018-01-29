@@ -62,11 +62,28 @@ $(function () {
             // save the feeds to local storage
             feeds = parseFeeds();
             saveFeeds(feeds);
-        }
+        };
+
+        this.sortFeeds = function () {
+            var feeds = loadFeeds();
+            if (feeds) {
+                $(".grid-item").each(function () {
+                    var feed = $(this);
+                    var hasUnread = false;
+                    feed.find(".stale").each(function () {
+                        hasUnread = true;
+                    });
+                    if (!hasUnread) {
+                       feed.detach().appendTo($(".grid"))
+                    }
+                });
+            }
+        };
     }
 
     var feeds = new Feeds($);
     feeds.shadeFeedLinks();
+    feeds.sortFeeds();
 
     var elem = document.querySelector('.grid');
     var pckry = new Packery( elem, {
@@ -77,7 +94,7 @@ $(function () {
 
     var onload = function () {
         pckry.shiftLayout();
-    }
+    };
 
     /**
      * Reload the page when the remaining time element is clicked
