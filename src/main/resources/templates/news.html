@@ -23,10 +23,11 @@
 
 <div class="grid">
     <!-- Feeds -->
-    <div th:id="${newsFeed.getUrl()}" class="grid-item" th:each="newsFeed : ${feeds}">
+    <div th:id="${newsFeed.getUrl()}" class="grid-item" th:attr="data-epoch=${newsFeed.epochPublishTime}"  th:each="newsFeed : ${feeds}">
         <h3><a href="#" th:href="${newsFeed.url}"><img th:if="${not #strings.isEmpty(newsFeed.imageUrl)}"
-                                                       th:src="${newsFeed.imageUrl}"/> <span
-                th:if="${#strings.isEmpty(newsFeed.imageUrl)}" th:text="${newsFeed.name}">Feed Name</span></a></h3>
+                                                       th:src="${newsFeed.imageUrl}"/><span
+                th:if="${#strings.isEmpty(newsFeed.imageUrl)}" th:text="${newsFeed.name}">Feed Name</span></a>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span th:text="${newsFeed.getTimeDifference()}" class="authorName"></span></h3>
         <ul>
             <li th:each="feedItem : ${newsFeed.feedItems}">
                 <a class="feedUrl" href="#" th:href="${feedItem.url}"><span

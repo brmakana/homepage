@@ -70,15 +70,17 @@ $(function () {
 
     $(".grid").isotope({
         getSortData: {
-            weight: function(itemElem) {
-                var unreadLinkCount = $( itemElem ).find('.stale').length;
-                console.log("element " + itemElem.id + " has weight " + unreadLinkCount);
-                return unreadLinkCount;
-            }
+            isUnread: function(itemElem) {
+                var unreadLinkCount = $( itemElem ).find('.feedUrl:not(.stale)').length;
+                console.log(itemElem.id + " : " + (unreadLinkCount>0));
+                return (unreadLinkCount > 0);
+            },
+            epochTime: '[data-epoch] parseInt'
         },
         layoutMode: 'packery',
         itemSelector: '.grid-item',
-        sortBy: 'weight'
+        sortBy: ['isUnread', 'epochTime'],
+        sortAscending: false
     });
 
     /**

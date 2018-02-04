@@ -1,72 +1,82 @@
 package io.makana.homepage.domain.news;
 
+import com.rometools.rome.feed.synd.SyndEntry;
+import com.rometools.rome.feed.synd.SyndFeed;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.time.*;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
+@Data
+@NoArgsConstructor
 public class NewsFeed {
+    public static final int DEFAULT_MAX_PER_SOURCE = 10;
+
     private String name;
     private String url;
     private String imageUrl;
-    private List<FeedItem> feedItems;
+    private List<FeedItem> feedItems = new ArrayList<>();
+    private Date publishedDate;
 
-    public NewsFeed() {
-        feedItems = new ArrayList<FeedItem>();
-    }
-
-    public void addFeedItem(FeedItem feedItem) {
-        if (feedItem == null) {
-            throw new IllegalArgumentException("FeedItem cannot be null!");
+    public NewsFeed(SyndFeed copyFrom, int maxPerSource) {
+        this.setName(copyFrom.getTitle());
+        this.setUrl(copyFrom.getLink());
+        this.setPublishedDate(copyFrom.getPublishedDate());
+        if (copyFrom.getImage() != null &&
+                copyFrom.getImage().getUrl() != null && !copyFrom.getImage().getUrl().isEmpty()) {
+            this.setImageUrl(copyFrom.getImage().getUrl());
         }
-        feedItems.add(feedItem);
+
+        if (copyFrom.getEntries() != null && !copyFrom.getEntries().isEmpty()) {
+            int feedCount = 0;
+            Iterator i = copyFrom.getEntries().iterator();
+            while (i.hasNext() && feedCount <= maxPerSource) {
+                SyndEntry entry = (SyndEntry) i.next();
+                FeedItem feedItem = new FeedItem();
+                feedItem.setUrl(entry.getLink());
+                feedItem.setSubject(entry.getTitle());
+                this.getFeedItems().add(feedItem);
+                feedCount++;
+            }
+        }
+    }
+    public NewsFeed(SyndFeed copyFrom) {
+        this(copyFrom, DEFAULT_MAX_PER_SOURCE);
     }
 
-    public String getName() {
-        return name;
+
+    public long getEpochPublishTime() {
+        return getPublishedDate().getTime();
     }
 
-    public void setName(String name) {
-        this.name = name;
+    private Date getPublishedDate() {
+        if (this.publishedDate != null) {
+            return this.publishedDate;
+        }
+        LocalDateTime ldt = LocalDateTime.now();
+        return Date.from(ldt.minusDays(1).atZone(ZoneId.systemDefault()).toInstant());
     }
 
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public List<FeedItem> getFeedItems() {
-        return feedItems;
-    }
-
-    public void setFeedItems(List<FeedItem> feedItems) {
-        this.feedItems = feedItems;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        NewsFeed newsFeed = (NewsFeed) o;
-
-        if (getName() != null ? !getName().equals(newsFeed.getName()) : newsFeed.getName() != null) return false;
-        return getUrl() != null ? getUrl().equals(newsFeed.getUrl()) : newsFeed.getUrl() == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = getName() != null ? getName().hashCode() : 0;
-        result = 31 * result + (getUrl() != null ? getUrl().hashCode() : 0);
-        return result;
+    public String getTimeDifference() {
+        Date publishedDate = getPublishedDate();
+        ZonedDateTime now = ZonedDateTime.now();
+        ZonedDateTime pubDate = publishedDate.toInstant().atZone(ZoneId.systemDefault());
+        Duration d = Duration.between(pubDate.toLocalDateTime(), now.toLocalDateTime());
+        if (d.toHours() >= 24) {
+            return d.toDays() + (d.toHours() < 48 ? " day" : " days");
+        }
+        else if (d.toMinutes() >= 60) {
+            return d.toHours() + (d.toMinutes() < 120 ? " hour" : " hours");
+        }
+        else if (d.toMinutes() >= 1) {
+            return d.toMinutes() + (d.toMinutes() == 1 ? " minute" : " minutes");
+        }
+        else {
+            return Math.round(d.toMillis() / 1000) + " seconds";
+        }
     }
 }

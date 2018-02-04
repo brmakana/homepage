@@ -1,35 +1,19 @@
 package io.makana.homepage.domain.news;
 
+import lombok.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Date;
 
+@Data
 public class FeedItem {
     private static final Logger logger = LoggerFactory.getLogger(FeedItem.class);
     private String subject;
     private String url;
-
-    @Override
-    public String toString() {
-        return "FeedItem{" +
-                "subject='" + subject + '\'' +
-                ", url='" + url + '\'' +
-                '}';
-    }
-
-    public String getSubject() {
-        return subject;
-    }
-
-    public void setSubject(String subject) {
-        this.subject = subject;
-    }
-
-    public String getUrl() {
-        return url;
-    }
+    private Date publishedDate;
 
     public String getAuthorName() {
         if (url == null || url.isEmpty()) {
@@ -42,9 +26,5 @@ public class FeedItem {
             logger.error("Unable to extract domain from feed url", e);
             return null;
         }
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
     }
 }

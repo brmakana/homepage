@@ -1,6 +1,5 @@
 package io.makana.homepage.domain.news;
 
-import com.rometools.rome.feed.synd.SyndEntry;
 import com.rometools.rome.feed.synd.SyndFeed;
 import com.rometools.rome.io.SyndFeedInput;
 import org.apache.commons.io.IOUtils;
@@ -11,22 +10,9 @@ import java.io.Reader;
 import java.io.StringReader;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.Iterator;
 
 @Component
 public class FeedFetcher {
-
-    public static final int DEFAULT_MAX_PER_SOURCE = 10;
-    private int maxPerSource = DEFAULT_MAX_PER_SOURCE;
-
-
-    public FeedFetcher() {
-
-    }
-
-    public FeedFetcher(int maxPerSource) {
-        this.maxPerSource = maxPerSource;
-    }
 
     public NewsFeed buildFeed(String url) throws Exception {
         URLConnection urlConnection = new URL(url).openConnection();
@@ -40,38 +26,8 @@ public class FeedFetcher {
         SyndFeedInput input = new SyndFeedInput();
         SyndFeed feed = input.build(reader);
 
-        NewsFeed newsFeed = new NewsFeed();
-        newsFeed.setName(feed.getTitle());
-        newsFeed.setUrl(feed.getLink());
-        if (feed.getImage() != null &&
-                feed.getImage().getUrl() != null &&
-                !feed.getImage().getUrl().isEmpty()) {
-            newsFeed.setImageUrl(feed.getImage().getUrl());
-        }
-
-        if (feed.getEntries() != null && !feed.getEntries().isEmpty()) {
-            int feedCount = 0;
-            Iterator i = feed.getEntries().iterator();
-            while (i.hasNext() && feedCount <= maxPerSource) {
-                SyndEntry entry = (SyndEntry) i.next();
-                FeedItem feedItem = new FeedItem();
-                feedItem.setUrl(entry.getLink());
-                feedItem.setSubject(entry.getTitle());
-                newsFeed.addFeedItem(feedItem);
-                feedCount++;
-            }
-        }
+        NewsFeed newsFeed = new NewsFeed(feed);
         return newsFeed;
     }
 
-    public int getMaxPerSource() {
-        return maxPerSource;
-    }
-
-    public void setMaxPerSource(int maxPerSource) {
-        if (maxPerSource <= 0 || maxPerSource > DEFAULT_MAX_PER_SOURCE) {
-            throw new IllegalArgumentException(String.valueOf(maxPerSource));
-        }
-        this.maxPerSource = maxPerSource;
-    }
 }
