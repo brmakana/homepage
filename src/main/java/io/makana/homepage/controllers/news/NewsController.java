@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.TimeZone;
 
 @Controller
-@RequestMapping("/news")
+@RequestMapping("/news**")
 public class NewsController {
 
     public static final String DATE_FORMAT_STRING = "EEEE MMMM d, yyyy h:mm:ss a z";

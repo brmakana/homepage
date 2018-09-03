@@ -11,8 +11,8 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-@Data
 @NoArgsConstructor
+@Data
 public class NewsFeed {
     public static final int DEFAULT_MAX_PER_SOURCE = 10;
 
@@ -48,6 +48,15 @@ public class NewsFeed {
         this(copyFrom, DEFAULT_MAX_PER_SOURCE);
     }
 
+    public boolean isImageSecure() {
+        if (this.imageUrl == null || this.imageUrl.isEmpty()) {
+            return true;
+        } else if (this.imageUrl.startsWith("https://")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     public long getEpochPublishTime() {
         return getPublishedDate().getTime();
