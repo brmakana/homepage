@@ -2,6 +2,7 @@ package io.makana.homepage.domain.news;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -25,6 +26,7 @@ public class NewsService {
 
 
     @Scheduled(cron = "0 0/45 * * * *")
+    @Async("threadPoolTaskExecutor")
     public void buildNewsFeeds() {
         logger.info("Updating news feeds...");
         List<NewsFeed> news = new ArrayList<>();
