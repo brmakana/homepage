@@ -36,10 +36,8 @@ public class NewsFeed {
             Iterator i = copyFrom.getEntries().iterator();
             while (i.hasNext() && feedCount <= maxPerSource) {
                 SyndEntry entry = (SyndEntry) i.next();
-                FeedItem feedItem = new FeedItem();
-                feedItem.setUrl(entry.getLink());
-                feedItem.setSubject(entry.getTitle());
-                this.getFeedItems().add(feedItem);
+                FeedItem feedItem = new FeedItem(entry.getTitle(), entry.getLink());
+                feedItems.add(feedItem);
                 feedCount++;
             }
         }
@@ -49,9 +47,9 @@ public class NewsFeed {
     }
 
     public boolean isImageSecure() {
-        if (this.imageUrl == null || this.imageUrl.isEmpty()) {
+        if (imageUrl == null || imageUrl.isEmpty()) {
             return true;
-        } else if (this.imageUrl.startsWith("https://")) {
+        } else if (imageUrl.startsWith("https://")) {
             return true;
         } else {
             return false;
@@ -63,8 +61,8 @@ public class NewsFeed {
     }
 
     private Date getPublishedDate() {
-        if (this.publishedDate != null) {
-            return this.publishedDate;
+        if (publishedDate != null) {
+            return publishedDate;
         }
         LocalDateTime ldt = LocalDateTime.now();
         return Date.from(ldt.minusDays(1).atZone(ZoneId.systemDefault()).toInstant());

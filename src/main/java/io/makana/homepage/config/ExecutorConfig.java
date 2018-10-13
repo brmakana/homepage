@@ -16,7 +16,6 @@ public class ExecutorConfig {
     @Bean
     public Executor threadPoolTaskExecutor() {
         ThreadPoolTaskExecutor threadPoolTaskExecutor = new ThreadPoolTaskExecutor();
-        threadPoolTaskExecutor.setMaxPoolSize(4);
         threadPoolTaskExecutor.setTaskDecorator(runnable -> {
             log.info("Executing background task...");
             return runnable;

@@ -1,27 +1,33 @@
 package io.makana.homepage.domain.news;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class FeedUrlRepository {
+@Slf4j
+public class FeedUrlRepository implements InitializingBean {
 
-    private static final Logger logger = LoggerFactory.getLogger(FeedUrlRepository.class);
-    private static String FILE_NAME = "feeds.txt";
+    @Value("classpath:feeds.txt")
+    private Resource feedFile;
+    private List<String> feedUrls;
 
     public List<String> getFeedUrls() {
-        List<String> feedUrls = new ArrayList<String>();
+        return feedUrls;
+    }
 
-        BufferedReader reader = null;
-        try {
-            reader = new BufferedReader(new InputStreamReader(getFeedsAsStream()));
+    private synchronized void parseFeedUrls() {
+        List<String> feedUrls = new ArrayList<>();
+        try (
+                BufferedReader reader = new BufferedReader(new InputStreamReader(feedFile.getInputStream()))
+        ) {
             String line;
             while ((line = reader.readLine()) != null) {
                 if (!line.trim().isEmpty()) {
@@ -29,24 +35,13 @@ public class FeedUrlRepository {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (reader != null) {
-                try {
-                    reader.close();
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
-            }
+            log.error("Exception retrieving feed urls from file: {}", e.getMessage(), e);
         }
-
-        return feedUrls;
+        this.feedUrls = feedUrls;
     }
 
-    private InputStream getFeedsAsStream() {
-        logger.debug("Using feed file: {}", FILE_NAME);
-        InputStream is =  NewsService.class.getClassLoader().getResourceAsStream(FILE_NAME);
-        return is;
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        parseFeedUrls();
     }
-
 }

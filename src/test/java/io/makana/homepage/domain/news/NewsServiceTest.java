@@ -11,6 +11,7 @@ import javax.annotation.Resource;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.Assert.*;
 import static org.mockito.Matchers.eq;
@@ -57,9 +58,7 @@ public class NewsServiceTest {
     public static class TestConfig {
         @Bean
         public FeedFetcher feedFetcher() throws Exception {
-            FeedItem item = new FeedItem();
-            item.setUrl("url");
-            item.setSubject("subject");
+            FeedItem item = new FeedItem("subject", "url");
 
             NewsFeed a = new NewsFeed();
             a.setName("A");
@@ -78,9 +77,9 @@ public class NewsServiceTest {
 
 
             FeedFetcher feedFetcher = mock(FeedFetcher.class);
-            when(feedFetcher.buildFeed(eq("a"))).thenReturn(a);
-            when(feedFetcher.buildFeed(eq("b"))).thenReturn(b);
-            when(feedFetcher.buildFeed(eq("c"))).thenReturn(c);
+            when(feedFetcher.buildFeed(eq("a"))).thenReturn(Optional.of(a));
+            when(feedFetcher.buildFeed(eq("b"))).thenReturn(Optional.ofNullable(b));
+            when(feedFetcher.buildFeed(eq("c"))).thenReturn(Optional.ofNullable(c));
             return feedFetcher;
         }
 

@@ -2,11 +2,10 @@ package io.makana.homepage.controllers.news;
 
 import io.makana.homepage.domain.news.NewsFeed;
 import io.makana.homepage.domain.news.NewsFeedRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import java.text.SimpleDateFormat;
@@ -20,17 +19,22 @@ public class NewsController {
 
     public static final String DATE_FORMAT_STRING = "EEEE MMMM d, yyyy h:mm:ss a z";
     public static final String DATE_ZONE_STRING = "America/Los_Angeles";
-    private static final Logger logger = LoggerFactory.getLogger(NewsController.class);
+    private SimpleDateFormat format = new SimpleDateFormat(DATE_FORMAT_STRING);
+
+    public NewsController() {
+        format.setTimeZone(TimeZone.getTimeZone(DATE_ZONE_STRING));
+    }
 
     @Resource
     private NewsFeedRepository newsFeedRepository;
 
     @RequestMapping
-    public String news(Model model) {
+    public ModelAndView news() {
+        ModelAndView mav = new ModelAndView("news");
         List<NewsFeed> feeds = newsFeedRepository.getNewsFeeds();
-        model.addAttribute("feeds", feeds);
-        model.addAttribute("date", formatDate(newsFeedRepository.getLastUpdatedDate()));
-        return "news";
+        mav.getModelMap().addAttribute("feeds", feeds);
+        mav.getModelMap().addAttribute("date", formatDate(newsFeedRepository.getLastUpdatedDate()));
+        return mav;
     }
 
     /**
@@ -38,17 +42,7 @@ public class NewsController {
      *
      * @return the current time as a string, formatted
      */
-    public String formatDate(Date date) {
-        SimpleDateFormat format = new SimpleDateFormat(DATE_FORMAT_STRING);
-        format.setTimeZone(TimeZone.getTimeZone(DATE_ZONE_STRING));
+    private String formatDate(Date date) {
         return format.format(date);
-    }
-
-    public NewsFeedRepository getNewsFeedRepository() {
-        return newsFeedRepository;
-    }
-
-    public void setNewsFeedRepository(NewsFeedRepository newsFeedRepository) {
-        this.newsFeedRepository = newsFeedRepository;
     }
 }
