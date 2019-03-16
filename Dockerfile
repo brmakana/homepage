@@ -1,4 +1,4 @@
-FROM	openjdk:10-jdk
+FROM	openjdk:11-jdk
 ADD     target/homepage*.jar /root/homepage.jar
 
 EXPOSE 8080

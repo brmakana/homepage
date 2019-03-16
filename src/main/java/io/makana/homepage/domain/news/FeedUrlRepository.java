@@ -15,7 +15,7 @@ import java.util.List;
 @Slf4j
 public class FeedUrlRepository implements InitializingBean {
 
-    @Value("classpath:feeds.txt")
+    @Value("${feeds.file:classpath:feeds.txt}")
     private Resource feedFile;
     private List<String> feedUrls;
 
