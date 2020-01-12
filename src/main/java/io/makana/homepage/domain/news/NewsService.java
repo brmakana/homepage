@@ -7,7 +7,9 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+import java.util.Vector;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Executor;
 
 @Component
 @Slf4j
@@ -22,29 +24,35 @@ public class NewsService {
     @Resource
     private FeedUrlRepository feedUrlRepository;
 
+    @Resource
+    private Executor threadPoolTaskExecutor;
+
     @Scheduled(cron = "0 0/45 * * * *")
     public void buildNewsFeeds() {
         log.info("Updating news feeds...");
-        List<NewsFeed> news = new ArrayList<>();
-        List<String> newsFeedUrls = feedUrlRepository.getFeedUrls();
+        final List<NewsFeed> news = new Vector<>();
+        final List<String> newsFeedUrls = feedUrlRepository.getFeedUrls();
         if (newsFeedUrls.isEmpty()) {
             log.error("No news feeds!");
+            return;
         }
+        final List<CompletableFuture<Void>> tasks = new ArrayList<>();
         for (String newsSite : newsFeedUrls) {
             log.info("Fetching {}", newsSite);
-            Optional<NewsFeed> feedAttempt = feedFetcher.buildFeed(newsSite);
-            if (feedAttempt.isPresent()) {
-                NewsFeed feed = feedAttempt.get();
-                // @todo workaround for broken google
-                if (feed != null && feed.getUrl() != null && feed.getUrl().contains("google")) {
-                    feed.setUrl("https://news.google.com");
-                }
-                news.add(feed);
-            } else {
-                log.info("Feed [{}] failed", newsSite);
-            }
-
+            final CompletableFuture<Void> task = CompletableFuture
+                    .supplyAsync(() -> feedFetcher.buildFeed(newsSite), threadPoolTaskExecutor)
+                    .thenAcceptAsync(optionalNewsFeed ->
+                            optionalNewsFeed.ifPresent(newsFeed -> {
+                                log.info("Successfully retrieved feed {}", newsFeed.getUrl());
+                                news.add(newsFeed);
+                            } ), threadPoolTaskExecutor)
+                    .exceptionally(throwable -> {
+                        log.error("Feed [{}] failed", newsSite, throwable);
+                        return null;
+                    });
+            tasks.add(task);
         }
+        CompletableFuture.allOf(tasks.toArray(new CompletableFuture[0])).join();
         newsFeedRepository.setNewsFeeds(news);
         log.info("Update complete");
     }
