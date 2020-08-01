@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 
@@ -30,7 +29,7 @@ public class NewsService {
     @Scheduled(cron = "0 0/45 * * * *")
     public void buildNewsFeeds() {
         log.info("Updating news feeds...");
-        final List<NewsFeed> news = new Vector<>();
+        final List<NewsFeed> news = new ArrayList<>();
         final List<String> newsFeedUrls = feedUrlRepository.getFeedUrls();
         if (newsFeedUrls.isEmpty()) {
             log.error("No news feeds!");

@@ -3,7 +3,6 @@ package io.makana.homepage.controllers.news;
 import io.makana.homepage.domain.news.NewsFeed;
 import io.makana.homepage.domain.news.NewsFeedRepository;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -19,7 +18,7 @@ public class NewsController {
 
     public static final String DATE_FORMAT_STRING = "EEEE MMMM d, yyyy h:mm:ss a z";
     public static final String DATE_ZONE_STRING = "America/Los_Angeles";
-    private SimpleDateFormat format = new SimpleDateFormat(DATE_FORMAT_STRING);
+    private final SimpleDateFormat format = new SimpleDateFormat(DATE_FORMAT_STRING);
 
     public NewsController() {
         format.setTimeZone(TimeZone.getTimeZone(DATE_ZONE_STRING));
