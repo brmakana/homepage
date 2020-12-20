@@ -1,11 +1,15 @@
 package io.makana.homepage.domain.chronicles;
 
-import org.junit.Test;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 public class ChroniclesParserTest {
 
@@ -16,11 +20,13 @@ public class ChroniclesParserTest {
             "Basileus Konstantinos V of the Byzantine Empire tried but failed to imprison Strategos Olvianos of Armeniacon, causing him to come out in open rebellion.\n" +
             "the Byzantine Empire was attacked by the Greek realm of Dorylaionian Peasant Revolt, ruled by Porphyrios.\n";
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void withNullBody() throws ChroniclesException {
         List<Entry> entries = new ArrayList<>();
         ChroniclesParser cut = new ChroniclesParser();
-        cut.parse(null);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            cut.parse(null);
+        });
     }
 
     @Test
@@ -28,7 +34,7 @@ public class ChroniclesParserTest {
         List<Entry> entries = new ArrayList<>();
         ChroniclesParser cut = new ChroniclesParser();
         entries = cut.parse("");
-        assertEquals("Expected empty results list", 0, entries.size());
+        assertTrue(entries.isEmpty());
     }
 
     @Test

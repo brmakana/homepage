@@ -1,11 +1,12 @@
 package io.makana.homepage.domain.news;
 
-import io.makana.homepage.domain.news.FeedItem;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 public class FeedItemTest {
+
     @Test
     public void getAuthorName() throws Exception {
         FeedItem item = new FeedItem("subject","http://www.nytimes.com");
