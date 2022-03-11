@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @NoArgsConstructor
 @Data
@@ -52,6 +53,7 @@ public class NewsFeed {
                 }
             }
             setPublishedDate(getEarlistDate(mostRecentPublishedDate, getPublishedDate()));
+            feedItems = feedItems.stream().distinct().collect(Collectors.toList());
         }
     }
 
