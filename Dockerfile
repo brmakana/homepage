@@ -1,4 +1,4 @@
-FROM	openjdk:11-jdk
+FROM	eclipse-temurin:21-jre-jammy
 ADD     target/homepage*.jar /root/homepage.jar
 
 EXPOSE 8080
