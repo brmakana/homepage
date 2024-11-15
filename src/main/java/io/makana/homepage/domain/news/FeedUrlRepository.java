@@ -1,5 +1,6 @@
 package io.makana.homepage.domain.news;
 
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,11 +18,8 @@ public class FeedUrlRepository implements InitializingBean {
 
     @Value("${feeds.file:classpath:feeds.txt}")
     private Resource feedFile;
+    @Getter
     private List<String> feedUrls;
-
-    public List<String> getFeedUrls() {
-        return feedUrls;
-    }
 
     private synchronized void parseFeedUrls() {
         List<String> feedUrls = new ArrayList<>();
@@ -36,6 +34,7 @@ public class FeedUrlRepository implements InitializingBean {
             }
         } catch (Exception e) {
             log.error("Exception retrieving feed urls from file: {}", e.getMessage(), e);
+            throw new RuntimeException(e.getMessage(), e);
         }
         this.feedUrls = feedUrls;
     }
