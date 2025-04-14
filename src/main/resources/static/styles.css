@@ -6,6 +6,12 @@
     box-sizing: border-box
 ;
 }
+/* Default styles (light mode) */
+body {
+    background-color: white;
+    color: black;
+}
+
 .grid {
     max-width: 80%;
     margin: 5px auto;
@@ -85,4 +91,58 @@ ul li:hover > .authorName {
 
 .alert {
     background-color: red;
+}
+
+
+/* Dark mode styles */
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: black;
+        color: white;
+    }
+    a:hover {
+        color: #ffffff;
+    }
+
+    a {
+        color: #ffffff;
+        font-size: small;
+        font-family: Century Gothic, sans-serif;
+    }
+
+    .authorName {
+        color: #DAD1D1;
+        font-size: 55%;
+    }
+
+    ul li:hover > a {
+        color: #fbb215;
+    }
+
+    ul li:hover > .authorName {
+        color: #fbb215;
+    }
+
+    .authorName:hover {
+        color: #fbb215;
+    }
+
+    .stale {
+        color: #535151;
+        font-size: x-small;
+    }
+
+    #lastModifiedDate {
+        font-size: large;
+        margin: 2px;
+    }
+
+    .remainingTime {
+        font-size: small;
+        margin: 20px;
+    }
+
+    .alert {
+        background-color: red;
+    }
 }
