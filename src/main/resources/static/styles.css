@@ -98,20 +98,20 @@ ul li:hover > .authorName {
 @media (prefers-color-scheme: dark) {
     body {
         background-color: black;
-        color: white;
+        color: #cd5c5c;
     }
     a:hover {
-        color: #ffffff;
+        color: #ff8f8f;
     }
 
     a {
-        color: #ffffff;
+        color: #cd5c5c;
         font-size: small;
         font-family: Century Gothic, sans-serif;
     }
 
     .authorName {
-        color: #DAD1D1;
+        color: #cd5c5c;
         font-size: 55%;
     }
 
@@ -144,5 +144,6 @@ ul li:hover > .authorName {
 
     .alert {
         background-color: red;
+        color: white;
     }
 }
