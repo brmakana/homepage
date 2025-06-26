@@ -42,7 +42,7 @@ public class NewsFeed {
             Date mostRecentPublishedDate = null;
             while (i.hasNext() && feedCount <= maxPerSource) {
                 SyndEntry entry = (SyndEntry) i.next();
-                FeedItem feedItem = new FeedItem(entry.getTitle(), entry.getLink());
+                FeedItem feedItem = new FeedItem(entry);
                 feedItems.add(feedItem);
                 feedCount++;
                 if (entry.getPublishedDate() != null) {
