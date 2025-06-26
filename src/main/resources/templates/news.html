@@ -35,8 +35,8 @@
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span th:text="${newsFeed.getTimeDifference()}" class="authorName"></span></h3>
         <ul>
             <li th:each="feedItem : ${newsFeed.feedItems}">
-                <a class="feedUrl" href="#" th:href="${feedItem.url}"><span
-                    th:text="${feedItem.subject}">Item headline</span></a>&nbsp;&nbsp;&nbsp;<span th:if="${feedItem.authorName ne newsFeed.feedItems.get(0).authorName}" class="authorName" th:text="${feedItem.authorName}">domain.com</span></li>
+                <div th:utext="${feedItem.subject}">Item headline</div>
+            </li>
         </ul>
     </div><!--/* mock data */-->
     <div id="feed1" class="grid-item" th:remove="all">
