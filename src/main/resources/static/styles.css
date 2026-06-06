@@ -98,14 +98,14 @@ ul li:hover > .authorName {
 @media (prefers-color-scheme: dark) {
     body {
         background-color: black;
-        color: #ffffff;
+        color: #6AAB73;
     }
     a:hover {
         color: #e0e0e0;
     }
 
     a {
-        color: #ffffff;
+        color: #6AAB73;
         font-size: small;
         font-family: Century Gothic, sans-serif;
     }
@@ -116,15 +116,15 @@ ul li:hover > .authorName {
     }
 
     ul li:hover > a {
-        color: #ffffff;
+        color: #a8ffa3;
     }
 
     ul li:hover > .authorName {
-        color: #ffffff;
+        color: #a8ffa3;
     }
 
     .authorName:hover {
-        color: #ffffff;
+        color: #a8ffa3;
     }
 
     .stale {
@@ -135,6 +135,7 @@ ul li:hover > .authorName {
     #lastModifiedDate {
         font-size: large;
         margin: 2px;
+        color: #C77DDB;
     }
 
     .remainingTime {

@@ -1,4 +1,4 @@
-FROM	eclipse-temurin:24.0.1_9-jre-ubi9-minimal
+FROM	eclipse-temurin:25
 ADD     build/libs/homepage-*.jar /root/homepage.jar
 
 EXPOSE 8080
